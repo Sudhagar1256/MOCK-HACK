@@ -2,32 +2,32 @@ package com.krct;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
+import org.testng.annotations.AfterMethod;
+import org.testng.annotations.BeforeMethod;
 
 import java.time.Duration;
 
 public class BaseTest {
+    protected WebDriver driver;
+    protected WebDriverWait wait;
 
-        protected WebDriver driver;
-        protected WebDriverWait wait;
-        protected String loginurl = "https://www.saucedemo.com/";
+    protected String loginurl = "https://www.saucedemo.com/";
 
-        @BeforeClass
-        public void setUp()
-        {
-            driver = new ChromeDriver();
-            wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        }
+    @BeforeMethod
+    public void setup(){
 
-        @AfterClass
-        public  void tearDown()
-        {
-            driver.quit();
-        }
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications");
+        options.addArguments("--disable-save-password-bubble");
+        options.addArguments("--disable-password-generation");
+        driver = new ChromeDriver(options);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
 
-
-
+    @AfterMethod
+    public void tearDown(){
+        driver.quit();
+    }
 }

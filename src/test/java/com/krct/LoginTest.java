@@ -26,7 +26,6 @@ public class LoginTest extends BaseTest{
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver, wait);
         login.details("standard_user","secret_sauce");
-        login.clickLogin();
         WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inventory_container")));
         Assert.assertTrue(msg.isDisplayed());
     }
@@ -36,7 +35,6 @@ public class LoginTest extends BaseTest{
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
         login.details(name,key);
-        login.clickLogin();
         WebElement error = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//h3[text()= 'Epic sadface: Sorry, this user has been locked out.']")));
         Assert.assertTrue(error.isDisplayed());
     }
@@ -54,7 +52,6 @@ public class LoginTest extends BaseTest{
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
         login.details("standard_user","secret_sauce");
-        login.clickLogin();
         login.logout();
         Assert.assertTrue(driver.getCurrentUrl().contains("saucedemo"));
 

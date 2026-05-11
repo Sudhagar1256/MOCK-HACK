@@ -34,6 +34,7 @@ public class LoginPage {
     public void details(String user, String pass){
         enterUsername(user);
         enterPassword(pass);
+        clickLogin();
     }
 
     public void logout(){
