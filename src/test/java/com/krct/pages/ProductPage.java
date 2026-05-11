@@ -66,5 +66,12 @@ public class ProductPage {
     public String insidePrice(){
         return driver.findElement(By.className("inventory_details_price")).getText();
     }
+    public void addToCart() {
+        driver.findElement(By.id("add-to-cart-sauce-labs-backpack")).click();
+    }
+    public void openCartt() {
+        driver.findElement(By.className("shopping_cart_link")).click();
+    }
+
 
 }

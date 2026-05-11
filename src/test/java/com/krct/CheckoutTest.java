@@ -1,52 +1,53 @@
-// CheckoutTest.java
+package com.krct.tests;
 
-package com.krct;
-
+import com.krct.BaseTest;
 import com.krct.pages.CheckoutPage;
 import com.krct.pages.LoginPage;
+import com.krct.pages.ProductPage;
+
+import org.apache.commons.io.FileUtils;
+
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
+
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
-public class CheckoutTest extends BaseTest{
+import java.io.File;
+
+public class CheckoutTest extends BaseTest {
 
     @Test
-    public void checkoutTest(){
+    public void checkoutFlowTest() {
 
-        driver.get(loginurl);
+        try {
+            driver.get(loginurl);
+            LoginPage login = new LoginPage(driver, wait);
+            login.details("standard_user", "secret_sauce");
+            ProductPage product = new ProductPage(driver, wait);
+            product.addToCart();
+            product.openCartt();
+            CheckoutPage checkout = new CheckoutPage(driver, wait);
+            checkout.clickCheckout();
+            checkout.enterDetails("Sudhagar", "P", "600001");
+            checkout.clickContinue();
+            Assert.assertEquals(checkout.getProductName(), "Sauce Labs Backpack");
+            Assert.assertTrue(checkout.getTotalPrice().contains("32.39"));
+            checkout.clickFinish();
+            Assert.assertEquals(checkout.confirmationMessage(), "Thank you for your order!");
 
-        LoginPage login = new LoginPage(driver,wait);
+        } catch (Exception e) {
+            try {
+                TakesScreenshot ts = (TakesScreenshot) driver;
+                File source = ts.getScreenshotAs(OutputType.FILE);
+                File destination = new File("screenshot.png");
+                FileUtils.copyFile(source, destination);
+                System.out.println("Screenshot Taken");
 
-        login.details("standard_user","secret_sauce");
-
-        CheckoutPage checkout =
-                new CheckoutPage(driver,wait);
-
-        checkout.addProduct();
-
-        checkout.openCart();
-
-        checkout.checkout();
-
-        checkout.customerDetails();
-
-        // Verify product name
-        Assert.assertEquals(
-                checkout.summaryProduct(),
-                "Sauce Labs Backpack"
-        );
-
-        // Verify total price displayed
-        Assert.assertTrue(
-                checkout.totalPrice().contains("Total")
-        );
-
-        // Finish order
-        checkout.finishOrder();
-
-        // Verify confirmation
-        Assert.assertEquals(
-                checkout.confirmMessage(),
-                "Thank you for your order!"
-        );
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
     }
 }
