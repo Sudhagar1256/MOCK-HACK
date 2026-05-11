@@ -13,6 +13,7 @@ public class BaseTest {
 
         protected WebDriver driver;
         protected WebDriverWait wait;
+        protected String loginurl = "https://www.saucedemo.com/";
 
         @BeforeClass
         public void setUp()
