@@ -12,7 +12,6 @@ public class ProductTest extends BaseTest {
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
         login.details("standard_user","secret_sauce");
-        login.clickLogin();
         ProductPage product = new ProductPage(driver,wait);
         Assert.assertTrue(product.checking());
     }
@@ -22,7 +21,7 @@ public class ProductTest extends BaseTest {
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
         login.details("standard_user","secret_sauce");
-        login.clickLogin();
+
         ProductPage product = new ProductPage(driver,wait);
         product.sortProducts();
         Assert.assertEquals(product.firstProduct(),"Sauce Labs Backpack");
@@ -33,7 +32,6 @@ public class ProductTest extends BaseTest {
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
         login.details("standard_user","secret_sauce");
-        login.clickLogin();
         ProductPage product = new ProductPage(driver,wait);
         product.sortPrice();
         Assert.assertEquals(product.firstPrice(),"$7.99");
@@ -44,7 +42,6 @@ public class ProductTest extends BaseTest {
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
         login.details("standard_user","secret_sauce");
-        login.clickLogin();
         ProductPage product = new ProductPage(driver,wait);
         String name = product.productName();
         String price = product.productPrice();

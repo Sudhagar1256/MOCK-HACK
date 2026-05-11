@@ -1,4 +1,4 @@
-package com.krct.tests;
+package com.krct;
 
 import com.krct.BaseTest;
 import com.krct.pages.CheckoutPage;
