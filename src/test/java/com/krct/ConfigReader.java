@@ -13,13 +13,10 @@ public class ConfigReader {
         prop = new Properties();
 
         try{
-
             FileInputStream file = new FileInputStream("src/test/resources/config.properties");
-
             prop.load(file);
 
         }catch (IOException e){
-
             e.printStackTrace();
         }
     }

@@ -25,7 +25,7 @@ public class LoginTest extends BaseTest{
     {
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver, wait);
-        login.details("standard_user","secret_sauce");
+        login.details(config.getUsername(), config.getPassword());
         WebElement msg = wait.until(ExpectedConditions.visibilityOfElementLocated(By.id("inventory_container")));
         Assert.assertTrue(msg.isDisplayed());
     }
