@@ -56,4 +56,12 @@ public class LoginTest extends BaseTest{
         Assert.assertTrue(driver.getCurrentUrl().contains("saucedemo"));
 
     }
+
+    @Test
+    public void case5Test(){
+        driver.get(loginurl);
+        LoginPage login = new LoginPage(driver,wait);
+        login.details(config.getUsername(), config.getPassword());
+        Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
+    }
 }

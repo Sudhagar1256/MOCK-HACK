@@ -41,7 +41,7 @@ public class ProductTest extends BaseTest {
     public void productTest4(){
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
-        login.details("standard_user","secret_sauce");
+        login.details(config.getUsername(),config.getPassword());
         ProductPage product = new ProductPage(driver,wait);
         String name = product.productName();
         String price = product.productPrice();
