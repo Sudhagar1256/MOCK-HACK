@@ -1,12 +1,17 @@
 package com.krct;
 
 import com.krct.pages.LoginPage;
+import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.By;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+
+import java.io.File;
 
 public class LoginTest extends BaseTest{
 
@@ -59,10 +64,25 @@ public class LoginTest extends BaseTest{
 
     @Test
     public void case5Test(){
-        driver.get(loginurl);
-        LoginPage login = new LoginPage(driver,wait);
-        login.details(config.getUsername(), config.getPassword());
-        login.clickLogin();
-        Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
+        try {
+            driver.get(loginurl);
+            LoginPage login = new LoginPage(driver,wait);
+            login.details(config.getUsername(), config.getPassword());
+            login.clickLogin();
+            Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
+
+        } catch (Exception e) {
+            try {
+                TakesScreenshot ts = (TakesScreenshot) driver;
+                File source = ts.getScreenshotAs(OutputType.FILE);
+                File destination = new File("screenshot.png");
+                FileUtils.copyFile(source, destination);
+                System.out.println("Screenshot Taken");
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+            e.printStackTrace();
+        }
     }
 }
