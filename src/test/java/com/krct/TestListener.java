@@ -7,11 +7,9 @@ import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
-public class TestListener
-        implements ITestListener {
+public class TestListener implements ITestListener {
 
-    ExtentReports extent =
-            ExtentManager.getReport();
+    ExtentReports extent = ExtentManager.getReport();
 
     ExtentTest test;
 
@@ -36,9 +34,7 @@ public class TestListener
     public void onTestFailure(
             ITestResult result){
 
-        test.fail(
-                result.getThrowable()
-        );
+        test.fail("Test Failed");
     }
 
     @Override
