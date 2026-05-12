@@ -62,27 +62,27 @@ public class LoginTest extends BaseTest{
 
     }
 
+
     @Test
     public void case5Test(){
-        try {
+        try{
             driver.get(loginurl);
             LoginPage login = new LoginPage(driver,wait);
-            login.details(config.getUsername(), config.getPassword());
-            login.clickLogin();
+            login.details("sudhagar", "secret_sauce");
             Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
 
-        } catch (Exception e) {
-            try {
+        }catch (AssertionError e){
+            try{
                 TakesScreenshot ts = (TakesScreenshot) driver;
                 File source = ts.getScreenshotAs(OutputType.FILE);
-                File destination = new File("screenshot.png");
+                File destination = new File("screenshots/LoginError.png");
                 FileUtils.copyFile(source, destination);
                 System.out.println("Screenshot Taken");
 
-            } catch (Exception ex) {
+            }catch (Exception ex){
                 ex.printStackTrace();
             }
-            e.printStackTrace();
+
         }
     }
 }
