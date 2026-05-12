@@ -13,7 +13,9 @@ public class BaseTest {
     protected WebDriver driver;
     protected WebDriverWait wait;
 
-    protected String loginurl = "https://www.saucedemo.com/";
+    ConfigReader config = new  ConfigReader();
+
+    protected String loginurl = config.getBaseUrl();
 
     @BeforeMethod
     public void setup(){
