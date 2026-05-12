@@ -62,6 +62,7 @@ public class LoginTest extends BaseTest{
         driver.get(loginurl);
         LoginPage login = new LoginPage(driver,wait);
         login.details(config.getUsername(), config.getPassword());
+        login.clickLogin();
         Assert.assertTrue(driver.getCurrentUrl().contains("inventory"));
     }
 }
